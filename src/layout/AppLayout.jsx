@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Outlet } from "react-router-dom";
 import { IoSearch } from "react-icons/io5"; 
+import "./AppLayout.style.css"
 
 const AppLayout = () => {
   return (

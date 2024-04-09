@@ -1,12 +1,12 @@
 import React from "react";
-import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
+import { useTopRatedMoviesQuery } from "../../../../hooks/useTopRatedMovies";
 import { Alert } from "bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "../MovieCard/MovieCard";
-import "./PopularMovieSlide.style.css";
+import "./TopRatedMovieSlide.style.css"
 
-const PopularMovieSlide = () => {
+const TopRatedMovieSlide = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -21,8 +21,8 @@ const PopularMovieSlide = () => {
       items: 1,
     },
   };
-  const { data, isLoading, isError, error } = usePopularMoviesQuery();
-
+  const { data, isLoading, isError, error } = useTopRatedMoviesQuery();
+  console.log('topratedddd',data)
   if (isLoading) {
     return <h1>Loading</h1>;
   }
@@ -31,9 +31,9 @@ const PopularMovieSlide = () => {
   }
   return (
     <div>
-      <div className="popular-text">
-        <h1>Popular Movies</h1>
-      </div>
+        <div className='text-white'>
+            <h1>TopRated Movies</h1>
+        </div>
       <Carousel
         responsive={responsive}
         infinite={true}
@@ -49,4 +49,4 @@ const PopularMovieSlide = () => {
   );
 };
 
-export default PopularMovieSlide;
+export default TopRatedMovieSlide;

@@ -1,28 +1,48 @@
 .banner {
-    height: 56vh;
-    background-position: left;
-    background-repeat: no-repeat;
-    background-size: cover;
+  height: 56vh;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
-.banner:before{
-    content:'';
-    background: linear-gradient(to top, black , transparent);
-    position: absolute;
-    left: 0;
-    height: 56vh;
-    width: 100%;
+.banner:before {
+  content: "";
+  background: linear-gradient(to top, black, transparent);
+  position: absolute;
+  left: 0;
+  height: 56vh;
+  width: 100%;
 }
 
-.banner-text-area{
-    width: 36%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding: 2rem;
+.banner-text-area {
+  width: 36%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
 }
 
 .banner-text-area > * {
-    z-index: 2;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .banner {
+    height: 200px; 
+  }
+  
+
+  .banner-text-area {
+    width: 80%; /* 배너 텍스트 영역의 너비 조정 */
+  }
+
+  .banner-text-area h1 {
+    font-size: 1.2rem; /* 텍스트 크기 조정 */
+  }
+
+  .banner-text-area p {
+    font-size: 0.8rem; /* 텍스트 크기 조정 */
+  }
 }

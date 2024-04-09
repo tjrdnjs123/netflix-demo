@@ -1,8 +1,19 @@
 import React from "react";
 import { Badge } from "react-bootstrap";
-import "./MovieCard.style.css"
+import "./MovieCard.style.css";
+import { useMoviesGenreQuery } from "../../../../hooks/useMovieGenre";
 
 const MovieCard = ({ movie }) => {
+  const { data:genreData } = useMoviesGenreQuery();
+  const showGenre=(genreIdList)=>{
+    if(!genreData) return []
+    const genreNameList = genreIdList.map((id)=>{
+      const genreObj = genreData.find((genre)=>genre.id === id)
+      return genreObj.name
+    })
+    return genreNameList
+    
+  }
   return (
     <div
       style={{
@@ -15,13 +26,31 @@ const MovieCard = ({ movie }) => {
     >
       <div className="overlay">
         <h1>{movie.title}</h1>
-        {movie.genre_ids.map((id) => (
+        {showGenre(movie.genre_ids).map((id) => (
           <Badge bg="danger">{id}</Badge>
         ))}
         <div>
-          <div>{movie.vote_average}</div>
-          <div>{movie.popularity}</div>
-          <div>{movie.adult ? "over18" : "under18"}</div>
+          <div>
+            <img
+              src="https://i.pinimg.com/736x/dc/75/bb/dc75bbe02ac10b0032faacab46c5a662.jpg"
+              className="vote-average-img"
+            />
+            {movie.vote_average}
+          </div>
+          <div>
+            <img
+              src="https://cdn-icons-png.freepik.com/512/5058/5058216.png"
+              className="popularity-img"
+            />
+            {movie.popularity}
+          </div>
+          <div>
+            <img
+              src={movie.adult ? "https://t4.ftcdn.net/jpg/05/32/29/13/360_F_532291309_n3pSV78DUKV9uSajqR00x42xn7KFvaVv.jpg":"https://cdn-icons-png.flaticon.com/512/5622/5622900.png"}
+              className="adult-img"
+            />
+            {movie.adult ? "18↑" : "All"}
+          </div>
         </div>
       </div>
     </div>

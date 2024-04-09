@@ -25,3 +25,23 @@
     transform: scale(1.3) translateZ(20px);
     z-index: 2;
 }
+
+.vote-average-img{
+    width: 10%;
+    height: 10%;
+    padding: 0.2rem;
+    
+}
+
+.popularity-img{
+    width: 10%;
+    height: 10%;
+    padding: 0.2rem;
+}
+
+.adult-img{
+    width: 10%;
+    height: 10%;
+    padding: 0.2rem;
+}
+
