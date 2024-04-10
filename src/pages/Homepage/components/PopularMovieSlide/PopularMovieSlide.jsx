@@ -5,6 +5,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "../MovieCard/MovieCard";
 import "./PopularMovieSlide.style.css";
+import Spinner from "react-bootstrap/Spinner";
 
 const PopularMovieSlide = () => {
   const responsive = {
@@ -22,9 +23,14 @@ const PopularMovieSlide = () => {
     },
   };
   const { data, isLoading, isError, error } = usePopularMoviesQuery();
+  console.log("popularmoviesdata", data);
 
   if (isLoading) {
-    return <h1>Loading</h1>;
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
   }
   if (isError) {
     return <Alert varient="danger">{error.message}</Alert>;

@@ -14,7 +14,7 @@ root.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>
-  <ReactQueryDevtools initialIsOpen={false} buttonPosition="top-right"/>
+  <ReactQueryDevtools initialIsOpen={false}/>
   </QueryClientProvider>
 );
 

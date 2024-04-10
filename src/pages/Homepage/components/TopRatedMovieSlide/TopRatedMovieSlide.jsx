@@ -4,7 +4,8 @@ import { Alert } from "bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "../MovieCard/MovieCard";
-import "./TopRatedMovieSlide.style.css"
+import "./TopRatedMovieSlide.style.css";
+import Spinner from "react-bootstrap/Spinner";
 
 const TopRatedMovieSlide = () => {
   const responsive = {
@@ -22,18 +23,22 @@ const TopRatedMovieSlide = () => {
     },
   };
   const { data, isLoading, isError, error } = useTopRatedMoviesQuery();
-  console.log('topratedddd',data)
+  console.log("topratedddd", data);
   if (isLoading) {
-    return <h1>Loading</h1>;
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
   }
   if (isError) {
     return <Alert varient="danger">{error.message}</Alert>;
   }
   return (
     <div>
-        <div className='text-white'>
-            <h1>TopRated Movies</h1>
-        </div>
+      <div className="text-white">
+        <h1>TopRated Movies</h1>
+      </div>
       <Carousel
         responsive={responsive}
         infinite={true}

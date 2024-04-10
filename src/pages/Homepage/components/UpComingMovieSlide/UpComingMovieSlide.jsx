@@ -4,7 +4,8 @@ import { Alert } from "bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "../MovieCard/MovieCard";
-import "./UpComingMovieSlide.style.css"
+import "./UpComingMovieSlide.style.css";
+import Spinner from "react-bootstrap/Spinner";
 
 const UpComingMovieSlide = () => {
   const responsive = {
@@ -22,18 +23,22 @@ const UpComingMovieSlide = () => {
     },
   };
   const { data, isLoading, isError, error } = useUpcomingMoviesQuery();
-  console.log('upcomingddd',data)
+  console.log("upcomingddd", data);
   if (isLoading) {
-    return <h1>Loading</h1>;
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
   }
   if (isError) {
     return <Alert varient="danger">{error.message}</Alert>;
   }
   return (
     <div>
-        <div className='text-white'>
-            <h1>Upcoming Movies</h1>
-        </div>
+      <div className="text-white">
+        <h1>Upcoming Movies</h1>
+      </div>
       <Carousel
         responsive={responsive}
         infinite={true}
