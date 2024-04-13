@@ -1,0 +1,10 @@
+.genre-btn{
+    width: 90%; /* 버튼의 너비를 100%로 설정하여 부모 요소의 너비에 맞게 설정합니다. */
+    height: 60%;
+    margin: 20px;
+    font-size: 88%;
+    font-weight: bold;
+    border: 3.5px solid burlywood;
+    background: linear-gradient(to top, rgb(255, 77, 77), transparent);
+    
+}

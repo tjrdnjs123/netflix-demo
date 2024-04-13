@@ -2,18 +2,23 @@ import React from "react";
 import { Badge } from "react-bootstrap";
 import "./MovieCard.style.css";
 import { useMoviesGenreQuery } from "../../../../hooks/useMovieGenre";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
-  const { data:genreData } = useMoviesGenreQuery();
-  const showGenre=(genreIdList)=>{
-    if(!genreData) return []
-    const genreNameList = genreIdList.map((id)=>{
-      const genreObj = genreData.find((genre)=>genre.id === id)
-      return genreObj.name
-    })
-    return genreNameList
-    
-  }
+  const { data: genreData } = useMoviesGenreQuery();
+  const navigate = useNavigate();
+  const showGenre = (genreIdList) => {
+    if (!genreData) return [];
+    const genreNameList = genreIdList.map((id) => {
+      const genreObj = genreData.find((genre) => genre.id === id);
+      return genreObj.name;
+    });
+    return genreNameList;
+  };
+  const detailMovie = () => {
+    navigate(`/movies/${movie.id}`);
+    console.log("detail movie", movie.id);
+  };
   return (
     <div
       style={{
@@ -23,11 +28,12 @@ const MovieCard = ({ movie }) => {
           ")",
       }}
       className="movie-card"
+      onClick={detailMovie}
     >
       <div className="overlay">
         <h1>{movie.title}</h1>
-        {showGenre(movie.genre_ids).map((id) => (
-          <Badge bg="danger">{id}</Badge>
+        {showGenre(movie.genre_ids).map((id,index) => (
+          <Badge key={index} bg="danger">{id}</Badge>
         ))}
         <div>
           <div>
@@ -46,7 +52,11 @@ const MovieCard = ({ movie }) => {
           </div>
           <div>
             <img
-              src={movie.adult ? "https://t4.ftcdn.net/jpg/05/32/29/13/360_F_532291309_n3pSV78DUKV9uSajqR00x42xn7KFvaVv.jpg":"https://cdn-icons-png.flaticon.com/512/5622/5622900.png"}
+              src={
+                movie.adult
+                  ? "https://t4.ftcdn.net/jpg/05/32/29/13/360_F_532291309_n3pSV78DUKV9uSajqR00x42xn7KFvaVv.jpg"
+                  : "https://cdn-icons-png.flaticon.com/512/5622/5622900.png"
+              }
               className="adult-img"
             />
             {movie.adult ? "18↑" : "All"}

@@ -3,6 +3,9 @@
   height: 440px;
 }
 
-.popular-text {
+.popular-text h1{
     z-index: 3;
+    margin-top: 145px;
 }
+
+

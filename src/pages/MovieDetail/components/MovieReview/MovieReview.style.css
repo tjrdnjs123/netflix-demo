@@ -1,0 +1,12 @@
+.review-area{
+    border: 1px solid red;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 30px;
+}
+
+.review-btn{
+    background-color: beige;
+    border: 5px solid darkkhaki;
+    font-weight: bolder;
+}

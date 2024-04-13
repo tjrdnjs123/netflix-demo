@@ -10,51 +10,49 @@ import { IoSearch } from "react-icons/io5";
 import "./AppLayout.style.css";
 
 const AppLayout = () => {
-  const [keyword, setKeyWord] = useState("");
+  const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
+  const goHome = () =>{
+    navigate(`/`);
+  }
+
   const searchByKeyWord = (event) => {
     event.preventDefault();
     navigate(`/movies?q=${keyword}`);
-    setKeyWord("");
-
+    setKeyword("");
   };
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
           <Navbar.Brand href="#">
-            {" "}
             <img
-              src={
-                "https://images.ctfassets.net/4cd45et68cgf/4nBnsuPq03diC5eHXnQYx/d48a4664cdc48b6065b0be2d0c7bc388/Netflix-Logo.jpg"
-              } // 로고 이미지 소스
+              src="https://images.ctfassets.net/4cd45et68cgf/4nBnsuPq03diC5eHXnQYx/d48a4664cdc48b6065b0be2d0c7bc388/Netflix-Logo.jpg"
               width="30"
               height="30"
-              className="logo-img"
-              alt="React Bootstrap logo"
+              className="d-inline-block align-top logo-img"
+              alt="Netflix Logo"
+              onClick={goHome}
             />
             Navbar scroll
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Toggle aria-controls="navbarScroll" className="navbar-hamburger"/>
           <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
+            <Nav className="me-auto my-2 my-lg-0" navbarScroll>
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/movies">Movies</Nav.Link>
             </Nav>
-            <Form className="d-flex" onSubmit={searchByKeyWord}>
+            <Form className="d-flex align-items-center" onSubmit={searchByKeyWord}>
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2"
+                className="me-2 flex-grow-1"
                 aria-label="Search"
                 value={keyword}
-                onChange={(event) => setKeyWord(event.target.value)}
+                onChange={(event) => setKeyword(event.target.value)}
               />
-              <Button variant="outline-danger" onClick={searchByKeyWord}>
+              <Button variant="outline-danger" type="submit">
                 <IoSearch />
               </Button>
             </Form>
