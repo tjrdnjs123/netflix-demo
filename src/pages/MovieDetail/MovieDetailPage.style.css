@@ -45,5 +45,22 @@
 }
 
 .text-area {
-    height: 50vh;
+  height: 50vh;
+}
+
+.modal-video {
+  width: 80vh;
+  height: 80vh;
+  max-width: 100vh;
+}
+
+.rr-btn{
+    background-color: bisque;
+    font-weight: bold;
+    border: 3px solid burlywood;
+    margin-right: 1rem;
+}
+
+.badge{
+    margin-bottom: 1rem;
 }

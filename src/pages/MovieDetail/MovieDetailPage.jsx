@@ -14,14 +14,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import MovieVideo from "./components/MovieVideo/MovieVideo";
 
-
 const MovieDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading, isError, error } = useDetailMovieQuery(Number(id));
   const [showReview, setShowReview] = useState(false);
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [show, setShow] = useState(false);
-  
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -41,13 +40,13 @@ const MovieDetailPage = () => {
     <div>
       <Container>
         <Row>
-          <Col lg={4} xs={6}>
+          <Col lg={4} md={6} xs={12}>
             <img
               src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${data.poster_path}`}
               className="detail-img"
             />
           </Col>
-          <Col lg={8} xs={6} className="text-area">
+          <Col lg={8} md={6} xs={12} className="text-area">
             <div>
               {data?.genres.map((genre, index) => (
                 <Badge bg="danger" className="genre" key={index}>
@@ -89,23 +88,32 @@ const MovieDetailPage = () => {
             </div>
             <hr />
             <div>
-              <Badge bg="danger">Budget</Badge>${" "}
-              {Number(data.budget).toLocaleString()}
+              <Badge className="badge" bg="danger">
+                Budget
+              </Badge>
+              $ {Number(data.budget).toLocaleString()}
             </div>
             <div>
-              <Badge bg="danger">Revenue</Badge>${" "}
-              {Number(data.revenue).toLocaleString()}
+              <Badge className="badge" bg="danger">
+                Revenue
+              </Badge>
+              $ {Number(data.revenue).toLocaleString()}
             </div>
             <div>
-              <Badge bg="danger">Release Date</Badge>
+              <Badge className="badge" bg="danger">
+                Release Date
+              </Badge>
               {data.release_date}
             </div>
             <div>
-              <Badge bg="danger">Rue time</Badge>
+              <Badge className="badge" bg="danger">
+                Rue time
+              </Badge>
               {data.runtime}분
             </div>
             <div className="button-container">
               <button
+                className="rr-btn"
                 onClick={() => {
                   setShowReview(!showReview);
                   setShowRecommendations(false);
@@ -114,6 +122,7 @@ const MovieDetailPage = () => {
                 REVIEWS
               </button>
               <button
+                className="rr-btn"
                 onClick={() => {
                   setShowRecommendations(!showRecommendations);
                   setShowReview(false);
@@ -122,30 +131,32 @@ const MovieDetailPage = () => {
                 RELATED MOVIES
               </button>
               <Button variant="primary" onClick={handleShow}>
-                예고편
+                Trailer
               </Button>
-
-              <Modal show={show} onHide={handleClose} size="lg">
-                <Modal.Header closeButton>
-                  <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <MovieVideo />
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
             </div>
           </Col>
         </Row>
       </Container>
+      <Container>
+        {/* 리뷰 및 추천 영화 컴포넌트 */}
+        {showReview && <MovieReview />}
+        {showRecommendations && <MovieRecommendations />}
+      </Container>
+      <div>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          contentClassName="modal-video"
+          centered
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body>
+            <MovieVideo />
+          </Modal.Body>
+        </Modal>
+      </div>
 
       {/* 리뷰 및 추천 영화 컴포넌트 */}
-      {showReview && <MovieReview />}
-      {showRecommendations && <MovieRecommendations />}
     </div>
   );
 };

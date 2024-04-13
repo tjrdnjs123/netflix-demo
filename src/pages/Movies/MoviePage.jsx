@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import MovieCard from "../Homepage/components/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import Dropdown from "react-bootstrap/Dropdown";
-import "./MoviePage.style.css"
+import "./MoviePage.style.css";
 import Button from "react-bootstrap/Button";
 import { useMoviesGenreQuery } from "../../hooks/useMovieGenre";
 
@@ -24,7 +24,7 @@ const MoviePage = () => {
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
   const [sortedLow, setSortedLow] = useState(false);
-  const [genreId,setGenreId] = useState(null);
+  const [genreId, setGenreId] = useState(null);
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
@@ -36,19 +36,19 @@ const MoviePage = () => {
     sortedLow,
     genreId,
   });
-  const { data:genreData } = useMoviesGenreQuery();
-  const searchGenre = (genreId) =>{
-    console.log("genre.id",genreId)
-    setGenreId(genreId)
-  }
+  const { data: genreData } = useMoviesGenreQuery();
+  const searchGenre = (genreId) => {
+    console.log("genre.id", genreId);
+    setGenreId(genreId);
+  };
   console.log("genreData", genreData);
   console.log("searchddd", data);
   const popularityLow = () => {
     setSortedLow(true);
   };
-  const popularityHigh = () =>{
+  const popularityHigh = () => {
     setSortedLow(false);
-  }
+  };
   if (isLoading) {
     return (
       <Spinner animation="border" role="status">
@@ -70,25 +70,32 @@ const MoviePage = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1"onClick={popularityHigh}>인기도 높은 순</Dropdown.Item>
+              <Dropdown.Item href="#/action-1" onClick={popularityHigh}>
+                인기도 높은 순
+              </Dropdown.Item>
               <Dropdown.Item href="#/action-2" onClick={popularityLow}>
                 인기도 낮은 순
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Row>
-          {genreData?.map((genre,index) => (
-          <Col key={index} lg={4} xs={4}>
-             <Button onClick={() => searchGenre(genre.id)} className="genre-btn" variant="danger">{genre.name}</Button>
-          </Col>
-        ))}
+            {genreData?.map((genre, index) => (
+              <Col key={index} lg={4} xs={6}>
+                <Button
+                  onClick={() => searchGenre(genre.id)}
+                  className="genre-btn"
+                  variant="danger"
+                >
+                  {genre.name}
+                </Button>
+              </Col>
+            ))}
           </Row>
-          
         </Col>
         <Col lg={8} xs={12}>
           <Row>
             {data.results.map((movie, index) => (
-              <Col key={index} lg={4} xs={6}>
+              <Col key={index} lg={4} md={6} xs={12}>
                 <MovieCard movie={movie} />
               </Col>
             ))}
